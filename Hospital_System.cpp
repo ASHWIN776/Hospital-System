@@ -1,3 +1,5 @@
+// can we use 3d array
+
 #include <iostream>
 #define LIMIT_SPECIAL 5
 #define MAX_PATIENTS 100
@@ -60,7 +62,7 @@ void add_newPatient()
         if(status == 1) insert_at_beginning of the queue
         else insert_normally
     */
-    if(status)
+    if(stat)
         insert_at_beginning(special, name);
     else insert_at_end(special, name);
 
@@ -80,7 +82,7 @@ void print_patients()
             int queue_idx  =  start_idx + freq_specialization[i] - 1;
 
             for(int j = start_idx; j <= queue_idx; ++j)   
-                cout<<names[j]<<" "<<status[i]<<"\n"; 
+                cout<<i<<names[j]<<" "<<status[j]<<"\n"; 
         }
     }
 }
@@ -98,7 +100,7 @@ void get_nextPatient()
 
         cout<<names[queue_idx]<<" go with the Dr";
     }
-    else cout<<"No patients at the moment. Have rest Dr";
+    else cout<<"No patients at the moment. Have rest, Dr";
 }
 
 int main()
