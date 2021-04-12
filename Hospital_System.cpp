@@ -10,6 +10,18 @@ int freq_specialization[TOTAL_SPECIAL + 1];
 string names[MAX_PATIENTS];
 string status[MAX_PATIENTS];    // status: 0 for regular and 1 for urgent
 
+void delete_from_beginning(int special)
+{
+    int start_idx = (special - 1) * LIMIT_SPECIAL;
+    int queue_idx  =  start_idx + freq_specialization[special] - 1;
+
+    // shift one to the left deleting the first entry
+    for(int i = start_idx; i < queue_idx; ++i)
+    {
+        names[i] = names[i + 1];
+        status[i] = status[i + 1];
+    }
+}
 
 void insert_at_beginning(int special, string name)
 {   
@@ -67,6 +79,7 @@ void add_newPatient()
     else insert_at_end(special, name);
 
     ++freq_specialization[special];
+    cout<<"Patient Added Successfully\n";
 }
 
 void print_patients()
@@ -82,7 +95,7 @@ void print_patients()
             int queue_idx  =  start_idx + freq_specialization[i] - 1;
 
             for(int j = start_idx; j <= queue_idx; ++j)   
-                cout<<i<<names[j]<<" "<<status[j]<<"\n"; 
+                cout<<names[j]<<" "<<status[j]<<"\n"; 
         }
     }
 }
@@ -95,15 +108,36 @@ void get_nextPatient()
 
     if(freq_specialization[special])
     {
-        int start_idx = (special - 1) * LIMIT_SPECIAL;
-        int queue_idx  =  start_idx + freq_specialization[special] - 1;
+        int start_idx = (special - 1)*LIMIT_SPECIAL;
+        cout<<names[start_idx]<<" go with the Dr";
+        delete_from_beginning(special);
 
-        cout<<names[queue_idx]<<" go with the Dr";
+        // decrease the frequency
+        --freq_specialization[special];
     }
     else cout<<"No patients at the moment. Have rest, Dr";
 }
 
 int main()
 {
+    cout<<"\t\tHOSPITAL SYSTEM";
+    
+    while(1)
+    {
+        cout<<"\n\n 1) Add new patient\n 2) Print all patients\n 3) Get next patient\n 4) Exit\n\n Choose your option : ";
+        int option;
+        cin>>option;
 
+        switch(option)
+        {
+            case 1: add_newPatient();
+            break;
+            case 2: print_patients();
+            break;
+            case 3: get_nextPatient();
+            break;
+            case 4: return 0;
+            default: cout<<"Invalid option, try again!";
+        }
+    }
 }
