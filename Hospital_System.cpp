@@ -1,4 +1,6 @@
 // can we use 3d array
+// comments needed
+// spaces needed at some places
 
 #include <iostream>
 #define LIMIT_SPECIAL 5
