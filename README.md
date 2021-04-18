@@ -1,5 +1,5 @@
 # Hospital-System
-### Simple Hospital System that I coded with C++
+### Simple Hospital System coded with C++
 ---
 #### About
 - There are 20 different specialization
